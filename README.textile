@@ -21,26 +21,23 @@ h3. Initializing GoogleAnalyticsProxy
 The following example is for Ruby on Rails to demonstrate how I load google analytics only in production, but GoogleAnalyticsProxy is loaded all the time.
 
 <pre><code>
-<% if RAILS_ENV == 'production' -%>
-  <!--// Google Analytics //-->
-  <script type="text/javascript">
-	
-	  var _gaq = _gaq || [];
-	  _gaq.push(['_setAccount', 'UA-XXXXXX-X']);
-	  _gaq.push(['_trackPageview']);
+	<% if RAILS_ENV == 'production' -%>
+		<script type="text/javascript">
+			var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+			document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+		</script>
+		<script type="text/javascript">
+			try {
+				var pageTracker = _gat._getTracker("UA-XXXXXX-1");
+				pageTracker._trackPageview();
+			} catch(err) {}
+		</script>
 
-	  (function() {
-	    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-	    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-	    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ga);
-	  })();
+	<% end -%>
 
+	<script type="text/javascript">
+	  var _gap = GoogleAnalyticsProxy;
 	</script>
-<% end -%>
-
-<script type="text/javascript">
-  var _gap = GoogleAnalyticsProxy;
-</script>
 </code></pre>
 
 h2. Distribution

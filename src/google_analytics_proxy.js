@@ -28,7 +28,7 @@
 
 var GoogleAnalyticsProxy = {
   
-  googleAnalyticsVariableName: '_gaq',
+  googleAnalyticsVariableName: '_gat',
   googleAnalyticsPageTracker: 'pageTracker',
   
   googleAnalyticsEnabled: function() {
@@ -48,6 +48,7 @@ var GoogleAnalyticsProxy = {
   // API: http://code.google.com/apis/analytics/docs/gaJS/gaJSApiBasicConfiguration.html#_gat.GA_Tracker_._trackPageview
   _trackPageview: function(opt_pageURL) {
     if (this.googleAnalyticsEnabled()) {
+      debugger;
       this.pageTracker()._trackPageview(opt_pageURL);
     } else {
       this.log('_pageTracker(' + opt_pageURL + ')');
